@@ -1,20 +1,44 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin"); // installed via npm
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin"); // installed via npm
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // installed via npm
+const webpack = require('webpack'); // to access built-in plugins
 
 module.exports = {
-	entry: "./src/index.js",
+	entry: {
+		index: "./src/index.js",
+		about: "./src/about.js",
+		contact: "./src/contact.js"
+	},
 	output: {
-		filename: 'main.js',
+		filename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist')
 	},
 	optimization: {
+		// splitChunks: {
+		// 	chunks: 'all',
+		// },
 		minimizer: [new UglifyJSPlugin()]
 	},
-	plugins: [new HtmlWebpackPlugin({
-		filename: 'index.html',
-		template: 'src/index.html'
-	})],
+	plugins: [
+		new webpack.ProgressPlugin(),
+        new CleanWebpackPlugin(),
+		new HtmlWebpackPlugin({
+			filename: 'index.html',
+			template: './src/index.html',
+			chunks: ['index']
+		}),
+		new HtmlWebpackPlugin({
+			filename: 'about.html',
+			template: './src/about.html',
+			chunks: ['about']
+		}),
+		new HtmlWebpackPlugin({
+			filename: 'contact.html',
+			template: './src/contact.html',
+			chunks: ['contact']
+		})
+	],
 	devServer: {
 		contentBase: path.join(__dirname, "dist"),
 		port: 9000

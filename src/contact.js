@@ -6,16 +6,16 @@ import React from "react"
 import { render } from "react-dom"
 import './style.css'
 
-const Greeting = () => {
+const Contact = () => {
 	return (
 		<div>
-			<h1>Hello from React</h1>
+			<h1>Contact from React</h1>
 		</div>
 	)
 }
 
 render (
-	<Greeting />,
-	document.getElementById('target')
+	<Contact />,
+	document.getElementById("target")
 )
 
