@@ -1,0 +1,10 @@
+h1 {
+	font-family: Arial;
+	color: blueviolet;
+}
+
+#image {
+	background: url('13_1024.jpg');
+	height: 500px;
+	width: 500px;
+}
