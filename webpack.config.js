@@ -8,17 +8,25 @@ module.exports = {
 	entry: {
 		index: "./src/index.js",
 		about: "./src/about.js",
-		contact: "./src/contact.js"
+		contact: "./src/contact.js",
+		navbar: "./src/navbar.js"
 	},
 	output: {
 		filename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist')
 	},
 	optimization: {
-		// splitChunks: {
-		// 	chunks: 'all',
-		// },
-		minimizer: [new UglifyJSPlugin()]
+		splitChunks: {
+			chunks: 'all',
+			name: 'vendors'
+		},
+		minimizer: [new UglifyJSPlugin({
+			uglifyOptions: {
+				output: {
+				  comments: false,
+				}
+			}
+		})]
 	},
 	plugins: [
 		new webpack.ProgressPlugin(),
@@ -26,17 +34,38 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
 			template: './src/index.html',
-			chunks: ['index']
+			chunks: ['vendors', 'index', 'navbar'],
+			minify: {
+				minifyCSS: true,
+	        	minifyJS: true,
+    	    	removeComments: true,
+        		collapseWhitespace: true,
+        		preserveLineBreaks: false
+			}
 		}),
 		new HtmlWebpackPlugin({
 			filename: 'about.html',
 			template: './src/about.html',
-			chunks: ['about']
+			chunks: ['vendors', 'about', 'navbar'],
+			minify: {
+				minifyCSS: true,
+	        	minifyJS: true,
+    	    	removeComments: true,
+        		collapseWhitespace: true,
+        		preserveLineBreaks: false
+			}
 		}),
 		new HtmlWebpackPlugin({
 			filename: 'contact.html',
 			template: './src/contact.html',
-			chunks: ['contact']
+			chunks: ['vendors', 'contact', 'navbar'],
+			minify: {
+				minifyCSS: true,
+	        	minifyJS: true,
+    	    	removeComments: true,
+        		collapseWhitespace: true,
+        		preserveLineBreaks: false
+			}
 		})
 	],
 	devServer: {

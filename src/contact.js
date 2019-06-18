@@ -10,6 +10,7 @@ const Contact = () => {
 	return (
 		<div>
 			<h1>Contact from React</h1>
+			<div id='navbar'></div>
 		</div>
 	)
 }

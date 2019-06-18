@@ -10,6 +10,7 @@ const About = () => {
 	return (
 		<div>
 			<h1>About from React</h1>
+			<div id='navbar'></div>
 		</div>
 	)
 }
